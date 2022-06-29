@@ -1,28 +1,27 @@
-#include <stdio.h>
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
 /**
- * print_python_list_info - shows info about Python lists
- * @p: object
- *
- * Return: 0
+ * print_python_list_info - prints basic information about python lists
+ * @p: python object representation of objects of certain types
+ * Return: nothing
  */
 
 void print_python_list_info(PyObject *p)
 {
-	long int list_size, a, i;
-
-	i = 0;
 	PyObject *obj;
+	int i = 0;
 
-	list_size = PyList_Size(p);
-	a = ((PyListObject *)p)->allocated;
-	printf("[*] Size of the Python List = %ld\n", list_size);
-	printf("[*] Allocated = %ld\n", a);
-	while (i < list_size)
+	if (PyList_Check(p))
+	{
+		printf("[*] Size of the Python List = %ld\n", PyList_Size(p));
+		printf("[*] Allocated = %ld\n", ((PyListObject *)p)->allocated);
+	}
+
+	while (i < PyList_Size(p))
 	{
 		obj = PyList_GetItem(p, i);
-		printf("Element %ld: %s\n", i, Py_TYPE(obj)->tp_name);
+		printf("Element %d: %s\n", i, Py_TYPE(obj)->tp_name);
 		i++;
 	}
 }

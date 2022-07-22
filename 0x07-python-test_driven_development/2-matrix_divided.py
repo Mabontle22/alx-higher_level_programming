@@ -1,30 +1,35 @@
 #!/usr/bin/python3
 """
-    Contain function that handles matrix division
+Module 2-matrix_divided
+Contains method that divides all elements of a matrix and returns new matrix
+Requires same size lists of ints or floats, and max two decimal places
 """
 
 
 def matrix_divided(matrix, div):
-    """Divides all elements of a matrix"""
-
-    if not isinstance(matrix, list):
-        raise TypeError(
-            "matrix must be a matrix (list of lists) of integers/floats")
-    if not all(isinstance(v, list) for v in matrix):
-        raise TypeError(
-            "matrix must be a matrix (list of lists) of integers/floats")
-    if not all(isinstance(v, (int, float)) for row in matrix for v in row):
-        raise TypeError(
-            "matrix must be a matrix (list of lists) of integers/floats")
-
-    for index, row in enumerate(matrix):
-        if len(row) != len(matrix[index - 1]):
-            raise TypeError("Each row of the matrix must have the same size")
-
+    """
+    Returns new matrix with dividends
+    """
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    return list(map(lambda row: list(map(lambda v:
-                                         round(v/div, 2), row)), matrix))
+    msg = "matrix must be a matrix (list of lists) of integers/floats"
+    if type(matrix) is not list or len(matrix) == 0 or len(matrix[0]) == 0:
+        raise TypeError(msg)
+
+    new_matrix = []
+    samelen = len(matrix[0])
+    for lists in matrix:
+        if type(lists) is not list:
+            raise TypeError(msg)
+        if len(lists) != samelen:
+            raise TypeError("Each row of the matrix must have the same size")
+        newlist = []
+        for i in lists:
+            if not isinstance(i, (int, float)):
+                raise TypeError(msg)
+            newlist.append(round(i/div, 2))
+        new_matrix.append(newlist)
+    return 

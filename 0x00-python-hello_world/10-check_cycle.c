@@ -1,34 +1,25 @@
 #include "lists.h"
 
 /**
- * check_cycle - finds a cycle in a linked list
- * @list: linked list of listint_t
- * Description: finds cycle in a linked list using floyd's cycle
- * finding algorithm
+ * check_cycle - checks if a linked list contains a cycle
+ * @list: linked list to check
  *
- * Return: (0) if no cycle found (1) if cycle found
+ * Return: 1 if the list has a cycle, 0 if it doesn't
  */
-
 int check_cycle(listint_t *list)
 {
-	listint_t *hare;
-	listint_t *tortoise;
+	listint_t *slow = list;
+	listint_t *fast = list;
 
 	if (!list)
 		return (0);
 
-	tortoise = list;
-	hare = list;
-
-	while (tortoise)
+	while (slow && fast && fast->next)
 	{
-		tortoise = tortoise->next;
-		if (hare && hare->next)
-		{
-			hare = hare->next->next;
-			if (hare == tortoise)
-				return (1);
-		}
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
+			return (1);
 	}
 
 	return (0);

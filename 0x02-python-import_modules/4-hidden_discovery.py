@@ -1,12 +1,8 @@
 #!/usr/bin/python3
-import hidden_4
-
 if __name__ == "__main__":
-    pass
+    """Print all hidden directories"""
+    import hidden_4
 
-list_names = dir(hidden_4)
-
-for names in list_names:
-    if names[0] == "_":
-        continue
-    print(names)
+    for i in dir(hidden_4):
+        if i[:2] != "__":
+            print(i)

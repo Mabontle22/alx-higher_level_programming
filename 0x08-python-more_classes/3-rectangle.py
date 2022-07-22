@@ -1,71 +1,73 @@
 #!/usr/bin/python3
 """
-    Module contains of a single class
+Module 3-rectangle
+Contains class Rectangle with private attribute width and height,
+public area and perimeter methods, and allows printing #'s
 """
 
 
 class Rectangle:
-    """Defines a reactangle"""
-
+    """
+    Defines class rectangle with private attribute width and height
+    Args:
+        width (int): width
+        height (int): height
+    Functions:
+        __init__(self, width, height)
+        width(self)
+        width(self, value)
+        height(self)
+        height(self, value)
+        area(self)
+        perimeter(self)
+        __str__(self)
+    """
     def __init__(self, width=0, height=0):
-        """Initializing of instance data"""
-        if not isinstance(width, (int, float)):
-            raise TypeError("width must be an integer")
-        if width < 0:
-            raise ValueError("width must be >= 0")
-        if not isinstance(height, (int, float)):
-            raise TypeError("height must be an integer")
-        if height < 0:
-            raise ValueError("height must be >= 0")
-        self.__width = width
-        self.__height = height
-
-    def __str__(self):
-        """Prints rectangle using `#` character"""
-        string = []
-        if self.__width == 0 or self.__height == 0:
-            return ""
-        for i in range(self.__height):
-            for j in range(self.__width):
-                string.append("#")
-            if i < (self.__height - 1):
-                string.append("\n")
-        return "".join(string)
+        """ Initialize rectangles """
+        self.width = width
+        self.height = height
 
     @property
     def width(self):
-        """Retrieves the value of `width`"""
+        """ Getter returns width """
         return self.__width
-
-    @property
-    def height(self):
-        """Retrieves the value of `height`"""
-        return self.__height
 
     @width.setter
     def width(self, value):
-        """Sets the value of atribute `width` to new value"""
-        if not isinstance(value, (int, float)):
+        """ Setter sets width if int > 0 """
+        if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
             raise ValueError("width must be >= 0")
         self.__width = value
 
+    @property
+    def height(self):
+        """ Getter returns height """
+        return self.__height
+
     @height.setter
     def height(self, value):
-        """Sets the value of atribute `height` to new value"""
-        if not isinstance(value, (int, float)):
+        """ Setter sets height if int > 0 """
+        if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
 
     def area(self):
-        """Calculates the area of a reactangle"""
-        return (self.__width * self.__height)
+        """ Return width * height """
+        return self.__width * self.__height
 
     def perimeter(self):
-        """Calculates the perimeter of a reactangle"""
+        """ Return 2*width + 2*height (or return 0 if width or height is 0)"""
         if self.__width == 0 or self.__height == 0:
             return 0
-        return ((self.__width + self.__height) * 2)
+        return (2 * self.__width) + (2 * self.height)
+
+    def __str__(self):
+        """ Prints rectangle with #'s """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        pic = "\n".join(["#" * self.__width for rows in range(self.__height)])
+        return pic

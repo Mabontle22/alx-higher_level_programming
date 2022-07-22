@@ -1,13 +1,10 @@
 #!/usr/bin/python3
-import sys
-
 if __name__ == "__main__":
-    pass
+    """ Add all arguments."""
+    import sys
 
-argv = sys.argv
-summation = 0
-for i, arg in enumerate(argv):
-    if i == 0:
-        continue
-    summation += int(arg)
-print(summation)
+    result = 0
+
+    for i in range(len(sys.argv) - 1):
+        result += (int(sys.argv[i + 1]))
+    print("{:d}".format(result))

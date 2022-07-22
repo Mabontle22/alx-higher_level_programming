@@ -1,58 +1,43 @@
-===============================
- How to Use 3-say_my_name.py
-===============================
+# run test with python3 -m doctest -v ./tests/3-say_my_name.txt
 
-This module contains one function
-
-``say_my_name(first_name, last_name="")``
-
-Contains two parameters:-
-
-first_name (str)
-last_name (str)
-
-last_name contains a default value of empty sring
-
-The function prints the name with the following string
-My name is <first name> <last name> depending of the arguments
-first and last name passed to it
-
-Strings
-=======
-
+First import method to test
 >>> say_my_name = __import__('3-say_my_name').say_my_name
 
-Case where first_name only is passed
+SUCCESS CASES:
 
->>> say_my_name("Alex")
-My name is Alex 
+Test two strings given:
+     >>> say_my_name("First", "Middle Last")
+     My name is First Middle Last
 
-Case where both names are passed
+     >>> say_my_name("Melissa")
+     My name is Melissa 
 
->>> say_my_name("Alex", "Steve")
-My name is Alex Steve
+FAIL CASES:
 
+Test other data types:
+     >>> say_my_name(123, "Last")
+     Traceback (most recent call last):
+     ...
+     TypeError: first_name must be a string
 
-Exceptions
-==========
+     >>> say_my_name("Melissa", ["Ng", "Hey"])
+     Traceback (most recent call last):
+     ...
+     TypeError: last_name must be a string
 
-When using ``say_my_name()`` with the wrong parameter values
-errors are raised
+Test extra args:
+     >>> say_my_name("Melissa", "Ng", "extra")
+     Traceback (most recent call last):
+     ...
+     TypeError: say_my_name() takes from 1 to 2 positional arguments but 3 were given
 
-Case other data type passed to first_name
+Test too few args
+     >>> say_my_name()
+     Traceback (most recent call last):
+     ...
+     TypeError: say_my_name() missing 1 required positional argument: 'first_name'
 
->>> say_my_name(["Alex"], "Steve")
-Traceback (most recent call last):
-TypeError: first_name must be a string
-
-Case other data type other than string is passed to last_name
-
->>> say_my_name("Alex", ('S','t','e','v','e'))
-Traceback (most recent call last):
-TypeError: last_name must be a string
-
-Case where first_name is ""
-
->>> say_my_name("", "Steve")
-Traceback (most recent call last):
-ValueError: first_name is required
+     >>> say_my_name(None)
+     Traceback (most recent call last):
+     ...
+     TypeError: first_name must be a strin

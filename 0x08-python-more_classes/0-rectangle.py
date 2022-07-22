@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 """
-    Module contains of a single class
+Module 0-rectangle
+Contains class Rectangle
+Empty class
 """
 
 
-class Rectangle:
-    """Defines a reactangle"""
+class Rectangle():
+    """
+    Defines empty class rectangle
+    """
     pass
